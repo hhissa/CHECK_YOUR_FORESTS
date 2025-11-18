@@ -8,6 +8,6 @@ export abstract class ImageryRepository {
 
 interface Params {
   date: Date;
-  bbox: [[number, number], [number, number]];
+  bbox: number[][];
 };
 

@@ -12,5 +12,8 @@
   "dependencies": {
     "eslint": "^9.36.0",
     "typescript": "^5.9.2"
+  },
+  "devDependencies": {
+    "vite": "^7.2.2"
   }
 }

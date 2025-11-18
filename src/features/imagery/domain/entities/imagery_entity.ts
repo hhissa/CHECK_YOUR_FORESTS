@@ -1,11 +1,11 @@
 export class Imagery {
   constructor(
-    public readonly id: string,
-    public readonly images: Map<string, Asset>,
-    public readonly bbox: [[number, number], [number, number]],
+    public readonly id: String,
+    public readonly images: Map<string, ArrayBuffer>,
+    public readonly bbox: number[][],
     public readonly date: Date,
-    public readonly satellite: string,
-    public readonly collections: string[]
+    public readonly satellite: String,
+    public readonly collections: String[]
   ) {
 
   }
@@ -13,8 +13,8 @@ export class Imagery {
 
 export class Asset {
   constructor(
-    public readonly id: string,
-    public readonly url: string,
+
+    public readonly url: String,
   ) {
 
   }
