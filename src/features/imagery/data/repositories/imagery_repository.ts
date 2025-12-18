@@ -1,6 +1,6 @@
 import { Imagery } from "../../domain/entities/imagery_entity";
 import { ImageryRepository } from "../../domain/repositories/imagery_repository";
-import { ImageryRemoteDataSource } from "../datasources/imagery_remote_data_source";
+import { ImageryRemoteDataSource } from "../datasources/imagery_remote_data_source_NASA";
 import { ImageryLocalDataSource } from "../datasources/imagery_local_data_source";
 import { NetworkTest } from "../../../../core/network_test";
 import { ImageryError } from "../../../../core/error/imagery_error";
@@ -37,7 +37,7 @@ export class ImageryRepositoryImpl extends ImageryRepository {
       try {
         let imagery = await lambda(params);
         console.log("got Imagery")
-        await this.localDataSource.cacheImagery(imagery);
+        //await this.localDataSource.cacheImagery(imagery);
         return imagery;
       } catch (error) {
         return new ImageryError("Failed to get RGB Imagery");

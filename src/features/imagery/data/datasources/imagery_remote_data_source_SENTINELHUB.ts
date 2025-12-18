@@ -12,7 +12,7 @@ interface Params {
   bbox: [[number, number], [number, number]];
 };
 
-export class ImageryRemoteDataSourceImpl implements ImageryRemoteDataSource {
+export class ImageryRemoteDataSourceSENTINEL implements ImageryRemoteDataSource {
 
   public async getRGBImagery(params: Params): Promise<ImageryModel> {
     console.log('json logged')
@@ -92,7 +92,7 @@ function evaluatePixel(sample) {
 
 
     const json = {
-      id: 0,
+      id: crypto.randomUUID(),
       images: {
         main: {
           data: imageData,
@@ -181,7 +181,7 @@ function evaluatePixel(sample) {
 `
     };
 
-
+    var token = authenticate();
     const response = await fetch("https://services-uswest2.sentinel-hub.com/api/v1/process", {
       method: "POST",
       headers: {

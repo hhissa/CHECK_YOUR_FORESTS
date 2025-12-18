@@ -2,7 +2,7 @@ import { Imagery, Asset } from "../../domain/entities/imagery_entity";
 export class ImageryModel extends Imagery {
   constructor(
     public readonly id: string,
-    public readonly images: Map<string, ArrayBuffer>,
+    public readonly images: Map<string, any>,
     public readonly bbox: [[number, number], [number, number]],
     public readonly date: Date,
     public readonly satellite: string,
