@@ -6,6 +6,8 @@ import { GetImagery } from "../../domain/usecases/imagery_usecase";
 import { ImageryBloc } from "../state/imagery_bloc";
 import { Empty, Loading, Loaded } from "../state/imagery_state";
 import { getRGBImagery } from "../state/imagery_event";
+import { MapWidget } from "../widgets/map_widget/map_widget";
+import { SideBar } from "../widgets/side_bar/side_bar";
 
 var remotedatasource = new ImageryRemoteDataSourceWMS();
 var localdatasource = new ImageryLocalDataSourceImpl();
@@ -15,17 +17,23 @@ var usecase = new GetImagery(repo);
 
 export const bloc = new ImageryBloc(usecase);
 
-let map: L.Map | null = null;
+let map: MapWidget | null = null;
+let sideBar: SideBar | null = null;
+
 
 bloc.subscribe((state) => {
   if (state instanceof Empty) {
     console.log("Empty");
     if (!map) {
-      map = L.map('map').setView([50.5, -0.09], 5);
-      L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        maxZoom: 18,
-        attribution: '&copy; OpenStreetMap'
-      }).addTo(map);
+      map = new MapWidget();
+      const mapRoot = document.getElementById("map")!;
+      map.mount(mapRoot);
+    }
+
+    if (!sideBar) {
+      sideBar = new SideBar(map);
+      const sideBarRoot = document.getElementById(("sidebar"))!;
+      sideBar.mount(sideBarRoot)
     }
   }
 
@@ -42,29 +50,14 @@ bloc.subscribe((state) => {
     if (imageData.data instanceof ArrayBuffer) {
       blob = new Blob([imageData.data], { type: imageData.mimeType });
     }
-    // If it's already a Blob 
     else {
       throw new Error("Unsupported image data type");
     }
-
     // Display image
     const url = URL.createObjectURL(blob);
 
-    const img = document.createElement("img");
-    img.src = url;
-    img.alt = "RGB Image";
-    img.width = 512;
-    img.height = 512;
-
-    img.style.position = "fixed";
-    img.style.top = "10px";
-    img.style.right = "10px";
-    img.style.zIndex = "10000";
-    img.style.border = "2px solid red";
-    img.style.background = "white";
-
-    document.body.appendChild(img); // optional
-
+    var imageOverlay = L.imageOverlay(url, L.latLngBounds(imageEntry.bbox));
+    imageOverlay.addTo(map?.map);
 
 
   }
@@ -80,7 +73,7 @@ bloc.dispatch(
   new getRGBImagery(
     [
       [13.822174072265625, 45.85080395917834],
-      [14.55963134765625, 46.29191774991382]
+      [20.5596313476562, 66.29191774991382]
     ],
     new Date(2025, 10, 12)
 

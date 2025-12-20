@@ -1,0 +1,25 @@
+main {
+  height: 100vh;           /* full viewport height */
+
+}
+
+#map {
+  height: 100vh;
+  width: 100%;
+}
+
+#sidebar {
+  position: absolute;      /* overlay on top of map */
+  bottom: 56px;               /* distance from top */
+  left: 16px;              /* distance from left */
+  width: 280px;
+  padding: 16px;
+  background: #ffffff;
+  border-radius: 14px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  z-index: 1000;           /* make sure it’s above the map */
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+
+

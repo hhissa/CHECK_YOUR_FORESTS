@@ -1,0 +1,65 @@
+
+
+#sidebar {
+  width: 280px;
+  padding: 16px;
+  background: #ffffff;
+  border-radius: 14px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.sidebar-header {
+  margin-bottom: 12px;
+}
+
+.sidebar-title {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #111;
+}
+
+.sidebar-explainer {
+  margin-top: 6px;
+  font-size: 0.85rem;
+  line-height: 1.4;
+  color: #555;
+}
+
+.sidebar-divider {
+  height: 1px;
+  background: #e5e5e5;
+  margin: 14px 0;
+}
+
+.sidebar-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sidebar-fields label {
+  display: flex;
+  flex-direction: column;
+  font-size: 0.75rem;
+  color: #333;
+}
+
+.sidebar-fields span {
+  margin-bottom: 4px;
+}
+
+.sidebar-fields input {
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 0.85rem;
+  outline: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.sidebar-fields input:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.15);
+}
