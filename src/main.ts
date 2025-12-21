@@ -1,1 +1,2 @@
-window.location.href = 'pages/splash_screen.html';
+console.log("main.ts loaded");
+window.location.assign('/pages/splash_screen.html');
