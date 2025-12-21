@@ -1,0 +1,22 @@
+h1 {text-align: center; font-family: "BBH Bogle"; color: green}
+
+p { text-align: center; padding: 30px;white-space: pre-line}
+.screen {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0; left: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: #f0f0f0;
+  opacity: 0;
+  transition: opacity 1s;
+}
+
+.screen.active {
+  opacity: 1;
+}
+
+

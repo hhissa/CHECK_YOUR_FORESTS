@@ -1,1 +1,1 @@
-window.location.href = 'pages/selection_page.html';
+window.location.href = 'pages/splash_screen.html';

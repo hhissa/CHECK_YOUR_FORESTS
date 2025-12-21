@@ -60,7 +60,7 @@ export class ImageryRemoteDataSourceWMS implements ImageryRemoteDataSource {
   }
 
   public async getNDVIImagery(params: Params): Promise<ImageryModel> {
-    const wmsBase = "https://gibs.earthdata.nasa.gov/wms/epsg4326/best/wms.cgi";
+    const wmsBase = "https://gibs.earthdata.nasa.gov/wms/epsg4326/all/wms.cgi";
     try {
       const width = params.width || 512;
       const height = params.height || 512;
@@ -68,37 +68,29 @@ export class ImageryRemoteDataSourceWMS implements ImageryRemoteDataSource {
       const time = params.date.toISOString().split("T")[0];
 
       // Fetch Red and NIR bands
-      const redLayer = "MODIS_Terra_Band4";
-      const nirLayer = "MODIS_Terra_Band2";
+      const NDVILayer = "MODIS_Terra_L3_NDVI_16Day";
 
-      const redUrl = `${wmsBase}?SERVICE=WMS&REQUEST=GetMap&VERSION=1.3.0&LAYERS=${redLayer}&TIME=${time}&BBOX=${bbox}&CRS=EPSG:4326&WIDTH=${width}&HEIGHT=${height}&FORMAT=image/tiff`;
-      const nirUrl = `${wmsBase}?SERVICE=WMS&REQUEST=GetMap&VERSION=1.3.0&LAYERS=${nirLayer}&TIME=${time}&BBOX=${bbox}&CRS=EPSG:4326&WIDTH=${width}&HEIGHT=${height}&FORMAT=image/tiff`;
+      const NDVIUrl = `${wmsBase}?SERVICE=WMS&REQUEST=GetMap&VERSION=1.3.0&LAYERS=${NDVILayer}&TIME=${time}&BBOX=${bbox}&CRS=EPSG:4326&WIDTH=${width}&HEIGHT=${height}&FORMAT=image/png`;
+      console.log(NDVIUrl)
+      const ndviResp = await fetch(NDVIUrl);
 
-      const [redResp, nirResp] = await Promise.all([fetch(redUrl), fetch(nirUrl)]);
-
-      if (!redResp || !redResp.ok) {
-        console.error("Red band fetch failed", redResp);
+      if (!ndviResp || !ndviResp.ok) {
+        console.error("Red band fetch failed", ndviResp);
         return new ImageryError("Failed to fetch Red band");
       }
 
-      if (!nirResp || !nirResp.ok) {
-        console.error("NIR band fetch failed", nirResp);
-        return new ImageryError("Failed to fetch NIR band");
-      }
 
-      const redData = await redResp.arrayBuffer();
-      const nirData = await nirResp.arrayBuffer();
+      const ndviData = await ndviResp.arrayBuffer();
 
       return ImageryModel.fromJson({
         id: crypto.randomUUID(),
         images: {
-          red: { data: redData, mimeType: "image/tiff" },
-          nir: { data: nirData, mimeType: "image/tiff" }
+          ndvi: { data: ndviData, mimeType: "image/jpg" },
         },
         bbox: params.bbox,
         date: time,
         satellite: "MODIS",
-        collections: [redLayer, nirLayer]
+        collections: [NDVILayer]
       });
 
     } catch (err) {

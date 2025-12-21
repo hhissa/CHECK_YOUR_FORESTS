@@ -24,7 +24,6 @@ export class MapWidget extends Widget {
     this.pointListeners.push(cb);
   }
 
-  // 🔹 ADD: emit helper
   private emitPointsChanged() {
     const points = this.getPoints();
     if (points instanceof Error) return;
@@ -49,7 +48,7 @@ export class MapWidget extends Widget {
       this.emitPointsChanged();
     });
 
-    if (this.markers.length > 4) {
+    if (this.markers.length > 2) {
       const oldest = this.markers.shift();
       oldest?.remove();
 
@@ -59,15 +58,23 @@ export class MapWidget extends Widget {
   };
 
   public getPoints() {
-    if (this.markers.length < 4) {
-      return Error("Not Enough points")
-    }
-    return [this.markers[0].latlng, this.markers[1].latlng, this.markers[2].latlng, this.markers[0].latlng]
+
+    return this.markers.map(m => m.getLatLng());
   }
 
   public setPoint(index: number, lat: number, lng: number) {
     const marker = this.markers[index];
-    if (!marker) return;
+    if (!marker) {
+      const icon = L.icon({
+        iconUrl: '../../../../../assets/Pasted image.png',
+
+        iconSize: [30, 35], // size of the icon
+        iconAnchor: [10, 34], // point of the icon which will correspond to marker's location
+      });
+
+      const marker = L.marker([1, 1], { draggable: true, icon: icon }).addTo(this.map);
+      this.markers.push(marker);
+    }
 
     marker.setLatLng([lat, lng]);
     this.emitPointsChanged();
