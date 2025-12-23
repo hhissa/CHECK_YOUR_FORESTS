@@ -1,3 +1,4 @@
+"use strict";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -7,34 +8,36 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-import { NetworkTest } from "../../../../core/network_test";
-import { ImageryLocalDataSourceImpl } from "../../data/datasources/imagery_local_data_source";
-import { ImageryRemoteDataSourceWMS } from "../../data/datasources/imagery_remote_data_source_NASA";
-import { ImageryRepositoryImpl } from "../../data/repositories/imagery_repository";
-import { GetImagery } from "../../domain/usecases/imagery_usecase";
-import { ImageryBloc } from "../state/imagery_bloc";
-import { Empty, Loading, Loaded } from "../state/imagery_state";
-import { MapWidget } from "../widgets/map_widget/map_widget";
-import { SideBar } from "../widgets/side_bar/side_bar";
-var remotedatasource = new ImageryRemoteDataSourceWMS();
-var localdatasource = new ImageryLocalDataSourceImpl();
-var networktest = new NetworkTest();
-var repo = new ImageryRepositoryImpl(remotedatasource, localdatasource, networktest);
-var usecase = new GetImagery(repo);
-export const bloc = new ImageryBloc(usecase);
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.bloc = void 0;
+const network_test_1 = require("../../../../core/network_test");
+const imagery_local_data_source_1 = require("../../data/datasources/imagery_local_data_source");
+const imagery_remote_data_source_NASA_1 = require("../../data/datasources/imagery_remote_data_source_NASA");
+const imagery_repository_1 = require("../../data/repositories/imagery_repository");
+const imagery_usecase_1 = require("../../domain/usecases/imagery_usecase");
+const imagery_bloc_1 = require("../state/imagery_bloc");
+const imagery_state_1 = require("../state/imagery_state");
+const map_widget_1 = require("../widgets/map_widget/map_widget");
+const side_bar_1 = require("../widgets/side_bar/side_bar");
+var remotedatasource = new imagery_remote_data_source_NASA_1.ImageryRemoteDataSourceWMS();
+var localdatasource = new imagery_local_data_source_1.ImageryLocalDataSourceImpl();
+var networktest = new network_test_1.NetworkTest();
+var repo = new imagery_repository_1.ImageryRepositoryImpl(remotedatasource, localdatasource, networktest);
+var usecase = new imagery_usecase_1.GetImagery(repo);
+exports.bloc = new imagery_bloc_1.ImageryBloc(usecase);
 let map = null;
 let sideBar = null;
 let currentImageOverlay = null;
-bloc.subscribe((state) => __awaiter(void 0, void 0, void 0, function* () {
-    if (state instanceof Empty) {
+exports.bloc.subscribe((state) => __awaiter(void 0, void 0, void 0, function* () {
+    if (state instanceof imagery_state_1.Empty) {
         console.log("Empty");
         if (!map) {
-            map = new MapWidget();
+            map = new map_widget_1.MapWidget();
             const mapRoot = document.getElementById("map");
             map.mount(mapRoot);
         }
         if (!sideBar) {
-            sideBar = new SideBar(map);
+            sideBar = new side_bar_1.SideBar(map);
             const sideBarRoot = document.getElementById(("sidebar"));
             sideBar.mount(sideBarRoot);
             let lastCenter = map.map.getCenter();
@@ -51,10 +54,10 @@ bloc.subscribe((state) => __awaiter(void 0, void 0, void 0, function* () {
             });
         }
     }
-    if (state instanceof Loading) {
+    if (state instanceof imagery_state_1.Loading) {
         console.log("Loading imagery...");
     }
-    if (state instanceof Loaded) {
+    if (state instanceof imagery_state_1.Loaded) {
         let blob;
         const imageEntry = state.imagery;
         const imageData = imageEntry.images.get("ndvi");

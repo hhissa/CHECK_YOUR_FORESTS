@@ -1,5 +1,8 @@
-import { Widget } from "../../../../../core/widgets/widget";
-export class MapWidget extends Widget {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.MapWidget = void 0;
+const widget_1 = require("../../../../../core/widgets/widget");
+class MapWidget extends widget_1.Widget {
     constructor() {
         super("map_widget");
         this.markers = [];
@@ -60,3 +63,4 @@ export class MapWidget extends Widget {
         this.emitPointsChanged();
     }
 }
+exports.MapWidget = MapWidget;

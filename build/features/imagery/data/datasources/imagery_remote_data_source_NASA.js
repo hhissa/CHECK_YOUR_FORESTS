@@ -1,3 +1,4 @@
+"use strict";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -7,11 +8,14 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-import { ImageryError } from "../../../../core/error/imagery_error";
-import { ImageryModel } from "../models/imagery_model";
-export class ImageryRemoteDataSource {
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.ImageryRemoteDataSourceWMS = exports.ImageryRemoteDataSource = void 0;
+const imagery_error_1 = require("../../../../core/error/imagery_error");
+const imagery_model_1 = require("../models/imagery_model");
+class ImageryRemoteDataSource {
 }
-export class ImageryRemoteDataSourceWMS {
+exports.ImageryRemoteDataSource = ImageryRemoteDataSource;
+class ImageryRemoteDataSourceWMS {
     /*
      * example function call: https://gibs.earthdata.nasa.gov/wmts/epsg4326/best/wmts.cgi?Service=WMTS&Request=GetTile&Version=1.0.0&layer=MODIS_Terra_CorrectedReflectance_TrueColor&tilematrixset=250m&TileMatrix=6&TileCol=36&TileRow=13&TIME=2012-07-09&style=default&Format=image%2Fjpeg
      * https://gibs.earthdata.nasa.gov/wms/epsg4326/best/wms.cgi?SERVICE=WMS&REQUEST=GetMap&VERSION=1.3.0&LAYERS=MODIS_Terra_CorrectedReflectance_TrueColor&TIME=2025-11-12&BBOX=13.822174072265625,45.85080395917834,14.55963134765625,46.29191774991382&CRS=EPSG:4326&WIDTH=512&HEIGHT=512&FORMAT=image/png
@@ -34,9 +38,9 @@ export class ImageryRemoteDataSourceWMS {
                 console.log(url);
                 const response = yield fetch(url);
                 if (!response.ok)
-                    return new ImageryError("Failed to fetch RGB imagery");
+                    return new imagery_error_1.ImageryError("Failed to fetch RGB imagery");
                 const imageData = yield response.arrayBuffer();
-                return ImageryModel.fromJson({
+                return imagery_model_1.ImageryModel.fromJson({
                     id: crypto.randomUUID(),
                     images: { main: { data: imageData, mimeType: "image/png" } },
                     bbox: params.bbox,
@@ -47,7 +51,7 @@ export class ImageryRemoteDataSourceWMS {
             }
             catch (err) {
                 console.error(err);
-                return new ImageryError("Server Error");
+                return new imagery_error_1.ImageryError("Server Error");
             }
         });
     }
@@ -66,10 +70,10 @@ export class ImageryRemoteDataSourceWMS {
                 const ndviResp = yield fetch(NDVIUrl);
                 if (!ndviResp || !ndviResp.ok) {
                     console.error("Red band fetch failed", ndviResp);
-                    return new ImageryError("Failed to fetch Red band");
+                    return new imagery_error_1.ImageryError("Failed to fetch Red band");
                 }
                 const ndviData = yield ndviResp.arrayBuffer();
-                return ImageryModel.fromJson({
+                return imagery_model_1.ImageryModel.fromJson({
                     id: crypto.randomUUID(),
                     images: {
                         ndvi: { data: ndviData, mimeType: "image/jpg" },
@@ -82,8 +86,9 @@ export class ImageryRemoteDataSourceWMS {
             }
             catch (err) {
                 console.error(err);
-                return new ImageryError("Server Error");
+                return new imagery_error_1.ImageryError("Server Error");
             }
         });
     }
 }
+exports.ImageryRemoteDataSourceWMS = ImageryRemoteDataSourceWMS;

@@ -1,3 +1,4 @@
+"use strict";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -7,10 +8,12 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-import { ImageryRepository } from "../../domain/repositories/imagery_repository";
-import { ImageryError } from "../../../../core/error/imagery_error";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.ImageryRepositoryImpl = void 0;
+const imagery_repository_1 = require("../../domain/repositories/imagery_repository");
+const imagery_error_1 = require("../../../../core/error/imagery_error");
 ;
-export class ImageryRepositoryImpl extends ImageryRepository {
+class ImageryRepositoryImpl extends imagery_repository_1.ImageryRepository {
     constructor(remoteDataSource, localDataSource, networkTest) {
         super();
         this.remoteDataSource = remoteDataSource;
@@ -38,7 +41,7 @@ export class ImageryRepositoryImpl extends ImageryRepository {
                     return imagery;
                 }
                 catch (error) {
-                    return new ImageryError("Failed to get RGB Imagery");
+                    return new imagery_error_1.ImageryError("Failed to get RGB Imagery");
                 }
             }
             else {
@@ -47,10 +50,11 @@ export class ImageryRepositoryImpl extends ImageryRepository {
                     return imagery;
                 }
                 catch (error) {
-                    return new ImageryError("Unable to retrieve Cached Imagery");
+                    return new imagery_error_1.ImageryError("Unable to retrieve Cached Imagery");
                 }
             }
         });
     }
 }
+exports.ImageryRepositoryImpl = ImageryRepositoryImpl;
 ;

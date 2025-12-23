@@ -1,4 +1,7 @@
-export class Widget {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Widget = void 0;
+class Widget {
     constructor(className, tag = "div") {
         this.mounted = false;
         this.root = document.createElement(tag);
@@ -32,3 +35,4 @@ export class Widget {
         return this.root;
     }
 }
+exports.Widget = Widget;

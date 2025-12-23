@@ -1,3 +1,4 @@
+"use strict";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -7,13 +8,16 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-import { authenticate } from "../../../../core/auth/authentication";
-import { ImageryError } from "../../../../core/error/imagery_error";
-import { ImageryModel } from "../models/imagery_model";
-export class ImageryRemoteDataSource {
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.ImageryRemoteDataSourceSENTINEL = exports.ImageryRemoteDataSource = void 0;
+const authentication_1 = require("../../../../core/auth/authentication");
+const imagery_error_1 = require("../../../../core/error/imagery_error");
+const imagery_model_1 = require("../models/imagery_model");
+class ImageryRemoteDataSource {
 }
+exports.ImageryRemoteDataSource = ImageryRemoteDataSource;
 ;
-export class ImageryRemoteDataSourceSENTINEL {
+class ImageryRemoteDataSourceSENTINEL {
     getRGBImagery(params) {
         return __awaiter(this, void 0, void 0, function* () {
             console.log('json logged');
@@ -66,7 +70,7 @@ function evaluatePixel(sample) {
 }
 `
             };
-            var token = authenticate();
+            var token = (0, authentication_1.authenticate)();
             //
             const response = yield fetch("https://services-uswest2.sentinel-hub.com/api/v1/process", {
                 method: "POST",
@@ -79,7 +83,7 @@ function evaluatePixel(sample) {
             });
             if (!response.ok) {
                 response.json().then(json => console.log("Response JSON:", json)).catch(console.error);
-                return new ImageryError("Server Error");
+                return new imagery_error_1.ImageryError("Server Error");
             }
             console.log(response);
             const imageData = yield response.arrayBuffer();
@@ -97,7 +101,7 @@ function evaluatePixel(sample) {
                 collections: ["landsat-ot-l1"]
             };
             console.log("output");
-            return ImageryModel.fromJson(json);
+            return imagery_model_1.ImageryModel.fromJson(json);
         });
     }
     getNDVIImagery(params) {
@@ -171,7 +175,7 @@ function evaluatePixel(sample) {
 }
 `
             };
-            var token = authenticate();
+            var token = (0, authentication_1.authenticate)();
             const response = yield fetch("https://services-uswest2.sentinel-hub.com/api/v1/process", {
                 method: "POST",
                 headers: {
@@ -182,7 +186,7 @@ function evaluatePixel(sample) {
                 body: JSON.stringify(body)
             });
             if (!response.ok) {
-                return new ImageryError("Server Error");
+                return new imagery_error_1.ImageryError("Server Error");
             }
             const imageData = yield response.arrayBuffer();
             const json = {
@@ -198,7 +202,8 @@ function evaluatePixel(sample) {
                 satellite: "landsat",
                 collections: ["landsat-ot-l1"]
             };
-            return ImageryModel.fromJson(json);
+            return imagery_model_1.ImageryModel.fromJson(json);
         });
     }
 }
+exports.ImageryRemoteDataSourceSENTINEL = ImageryRemoteDataSourceSENTINEL;

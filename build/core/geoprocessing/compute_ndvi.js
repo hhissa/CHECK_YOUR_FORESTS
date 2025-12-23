@@ -1,3 +1,4 @@
+"use strict";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -7,7 +8,9 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-export class RenderContext {
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.ComputeNDVI = exports.RenderContext = void 0;
+class RenderContext {
     constructor() {
         this.canvas = document.querySelector("#canvas");
         this.context = this.canvas.getContext("webgl");
@@ -39,7 +42,8 @@ export class RenderContext {
         gl.deleteProgram(program);
     }
 }
-export class ComputeNDVI {
+exports.RenderContext = RenderContext;
+class ComputeNDVI {
     constructor(renderContext) {
         this.rc = renderContext;
         if (!renderContext.context) {
@@ -142,3 +146,4 @@ export class ComputeNDVI {
         return tex;
     }
 }
+exports.ComputeNDVI = ComputeNDVI;

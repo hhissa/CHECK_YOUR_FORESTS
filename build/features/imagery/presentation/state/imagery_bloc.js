@@ -1,3 +1,4 @@
+"use strict";
 var __await = (this && this.__await) || function (v) { return this instanceof __await ? (this.v = v, this) : new __await(v); }
 var __asyncGenerator = (this && this.__asyncGenerator) || function (thisArg, _arguments, generator) {
     if (!Symbol.asyncIterator) throw new TypeError("Symbol.asyncIterator is not defined.");
@@ -11,39 +12,42 @@ var __asyncGenerator = (this && this.__asyncGenerator) || function (thisArg, _ar
     function reject(value) { resume("throw", value); }
     function settle(f, v) { if (f(v), q.shift(), q.length) resume(q[0][0], q[0][1]); }
 };
-import { ImageryError } from "../../../../core/error/imagery_error";
-import { Bloc } from "./bloc";
-import { getNDVIImagery, getRGBImagery } from "./imagery_event";
-import { Empty, Error, Loading, Loaded } from "./imagery_state";
-export class ImageryBloc extends Bloc {
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.ImageryBloc = void 0;
+const imagery_error_1 = require("../../../../core/error/imagery_error");
+const bloc_1 = require("./bloc");
+const imagery_event_1 = require("./imagery_event");
+const imagery_state_1 = require("./imagery_state");
+class ImageryBloc extends bloc_1.Bloc {
     constructor(getNDVIImagery) {
         super();
         this._getImagery = getNDVIImagery;
     }
-    get getInitialState() { return new Empty(); }
+    get getInitialState() { return new imagery_state_1.Empty(); }
     mapStatetoEvent(e) {
         return __asyncGenerator(this, arguments, function* mapStatetoEvent_1() {
             //if the user requests rgb imagery
-            if (e instanceof getRGBImagery) {
-                yield yield __await(new Loading());
+            if (e instanceof imagery_event_1.getRGBImagery) {
+                yield yield __await(new imagery_state_1.Loading());
                 const rgbImage = yield __await(this._getImagery.executeRGB({ bbox: e.bbox, date: e.date }));
-                if (rgbImage instanceof ImageryError) {
-                    yield yield __await(new Error("Unable to get Image"));
+                if (rgbImage instanceof imagery_error_1.ImageryError) {
+                    yield yield __await(new imagery_state_1.Error("Unable to get Image"));
                 }
                 else {
-                    yield yield __await(new Loaded(rgbImage));
+                    yield yield __await(new imagery_state_1.Loaded(rgbImage));
                 }
             }
-            else if (e instanceof getNDVIImagery) {
-                yield yield __await(new Loading());
+            else if (e instanceof imagery_event_1.getNDVIImagery) {
+                yield yield __await(new imagery_state_1.Loading());
                 const ndviImage = yield __await(this._getImagery.executeNDVI({ bbox: e.bbox, date: e.date }));
-                if (ndviImage instanceof ImageryError) {
-                    yield yield __await(new Error("Unable to get Image"));
+                if (ndviImage instanceof imagery_error_1.ImageryError) {
+                    yield yield __await(new imagery_state_1.Error("Unable to get Image"));
                 }
                 else {
-                    yield yield __await(new Loaded(ndviImage));
+                    yield yield __await(new imagery_state_1.Loaded(ndviImage));
                 }
             }
         });
     }
 }
+exports.ImageryBloc = ImageryBloc;

@@ -1,18 +1,26 @@
-export class ImageryState {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Error = exports.Loaded = exports.Loading = exports.Empty = exports.ImageryState = void 0;
+class ImageryState {
 }
-export class Empty extends ImageryState {
+exports.ImageryState = ImageryState;
+class Empty extends ImageryState {
 }
-export class Loading extends ImageryState {
+exports.Empty = Empty;
+class Loading extends ImageryState {
 }
-export class Loaded extends ImageryState {
+exports.Loading = Loading;
+class Loaded extends ImageryState {
     constructor(imagery) {
         super();
         this.imagery = imagery;
     }
 }
-export class Error extends ImageryState {
+exports.Loaded = Loaded;
+class Error extends ImageryState {
     constructor(errMsg) {
         super();
         this.errMsg = errMsg;
     }
 }
+exports.Error = Error;

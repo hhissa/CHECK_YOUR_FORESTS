@@ -1,4 +1,7 @@
-export class Imagery {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Asset = exports.Imagery = void 0;
+class Imagery {
     constructor(id, images, bbox, date, satellite, collections) {
         this.id = id;
         this.images = images;
@@ -8,8 +11,10 @@ export class Imagery {
         this.collections = collections;
     }
 }
-export class Asset {
+exports.Imagery = Imagery;
+class Asset {
     constructor(url) {
         this.url = url;
     }
 }
+exports.Asset = Asset;

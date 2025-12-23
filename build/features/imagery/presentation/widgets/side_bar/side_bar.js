@@ -1,7 +1,10 @@
-import { Widget } from "../../../../../core/widgets/widget";
-import { bloc } from "../../pages/selection_page";
-import { getNDVIImagery } from "../../state/imagery_event";
-export class SideBar extends Widget {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.SideBar = void 0;
+const widget_1 = require("../../../../../core/widgets/widget");
+const selection_page_1 = require("../../pages/selection_page");
+const imagery_event_1 = require("../../state/imagery_event");
+class SideBar extends widget_1.Widget {
     constructor(map) {
         super("sidebar");
         this.inputs = [];
@@ -27,7 +30,7 @@ export class SideBar extends Widget {
             const today = new Date();
             // Subtract 7 days (7 * 24 * 60 * 60 * 1000 milliseconds)
             const weekAgo = new Date(today.getTime() - 7 * 24 * 60 * 60 * 1000);
-            bloc.dispatch(new getNDVIImagery(bbox, weekAgo));
+            selection_page_1.bloc.dispatch(new imagery_event_1.getNDVIImagery(bbox, weekAgo));
         });
     }
     onMount() {
@@ -81,3 +84,4 @@ export class SideBar extends Widget {
         });
     }
 }
+exports.SideBar = SideBar;

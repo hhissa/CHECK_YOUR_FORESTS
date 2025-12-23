@@ -1,5 +1,8 @@
-import { Imagery } from "../../domain/entities/imagery_entity";
-export class ImageryModel extends Imagery {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.ImageryModel = void 0;
+const imagery_entity_1 = require("../../domain/entities/imagery_entity");
+class ImageryModel extends imagery_entity_1.Imagery {
     constructor(id, images, bbox, date, satellite, collections) {
         super(id, images, bbox, date, satellite, collections);
         this.id = id;
@@ -23,3 +26,4 @@ export class ImageryModel extends Imagery {
         };
     }
 }
+exports.ImageryModel = ImageryModel;
