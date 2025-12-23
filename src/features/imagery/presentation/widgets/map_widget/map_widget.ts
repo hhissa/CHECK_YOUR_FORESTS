@@ -33,14 +33,8 @@ export class MapWidget extends Widget {
 
   //---------------------%%Marker Behaviour%%----------------------------
   private onClick = (e: L.LeafletMouseEvent) => {
-    const icon = L.icon({
-      iconUrl: '../../../../../assets/Pasted image.png',
 
-      iconSize: [30, 35], // size of the icon
-      iconAnchor: [10, 34], // point of the icon which will correspond to marker's location
-    });
-
-    const marker = L.marker(e.latlng, { draggable: true, icon: icon }).addTo(this.map);
+    const marker = L.marker(e.latlng, { draggable: true }).addTo(this.map);
     this.markers.push(marker);
 
     // 🔹 ADD: listen to drag

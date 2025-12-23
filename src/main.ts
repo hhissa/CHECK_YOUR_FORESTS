@@ -1,2 +1,2 @@
 console.log("main.ts loaded");
-window.location.assign('/pages/splash_screen.html');
+window.location.assign('src/pages/splash_screen.html');
