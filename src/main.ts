@@ -1,2 +1,4 @@
+const BASE_URL = import.meta.env.BASE_URL;
 console.log("main.ts loaded");
-window.location.assign('src/pages/splash_screen.html');
+
+window.location.assign(`${BASE_URL}src/pages/splash_screen.html`);
