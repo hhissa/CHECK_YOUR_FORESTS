@@ -1,0 +1,1 @@
+import"./modulepreload-polyfill-B5Qt9EMX.js";function s(){function e(t){document.querySelectorAll(".screen").forEach(c=>c.classList.remove("active")),document.getElementById(t)?.classList.add("active")}e("splash-screen"),setTimeout(()=>e("selection-screen"),5e3),setTimeout(()=>window.location.href="selection_page.html",5e3)}s();
