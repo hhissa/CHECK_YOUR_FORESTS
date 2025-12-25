@@ -3,7 +3,7 @@ An NDVI site capable of client-side computing of NDVI's from TIFF's using WEBGL,
 [![Node.js](https://img.shields.io/badge/Node.js-6DA55F?logo=node.js&logoColor=white)](#)
 [![Vite](https://img.shields.io/badge/Vite-646CFF?logo=vite&logoColor=fff)](#)
 [![WebGL](https://img.shields.io/badge/WebGL-990000?logo=webgl&logoColor=white)](#)
-![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white)
+[![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=fff)](#)
 
 The source code, following clean architecure principles 
 
