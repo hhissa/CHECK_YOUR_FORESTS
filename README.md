@@ -1,5 +1,6 @@
-# 🌎 NDVI (VEGETATION INDEX) Website
-An NDVI site capable of client-side computing of NDVI's from TIFF's using WEBGL, Fetching pregenerated imagery and NDVI's from most popular API's and designed following Clean Architecture Principles 
+# 🌎 NDVI (Vegetation Index) Website
+An NDVI site capable of client-side computing of NDVI's from TIFF's using WEBGL, Fetching pregenerated imagery and NDVI's from most popular API's and designed following Clean Architecture Principles
+
 [![Node.js](https://img.shields.io/badge/Node.js-6DA55F?logo=node.js&logoColor=white)](#)
 [![Vite](https://img.shields.io/badge/Vite-646CFF?logo=vite&logoColor=fff)](#)
 [![WebGL](https://img.shields.io/badge/WebGL-990000?logo=webgl&logoColor=white)](#)
@@ -157,3 +158,4 @@ Or simply browse to http://localhost:3001/api/v1/cities in a browser.
 📖 Read my blog post about <a target="_blank" href="https://dev.to/glowiep/prisma-a-modern-orm-2knh">Prisma - A Modern ORM here</a>.
 
 ![Project hours logged](https://img.shields.io/badge/Project_Hours_Logged-10.5_h-blue)
+
