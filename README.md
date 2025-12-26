@@ -8,12 +8,10 @@ An NDVI site capable of client-side computing of NDVI's from TIFF's using WEBGL,
 
 The source code, following clean architecure principles, is structured as so 
 src
-├── assets
-│   └── Pasted image.png
 ├── core <-- General base classes and scripts present across multiple features
-│   ├── network_test.ts
-│   └── widgets
-│       └── widget.ts
+│   ├── network_test.ts 
+│   └── widgets 
+│       └── widget.ts 
 ├── features
 │   └── imagery <-- main imagery feature
 │       ├── data
@@ -67,3 +65,4 @@ Adhering to a rigid code structure allowed me to work methodically - filling in 
 - layered structure allows for testing in isolation using mock testing to simulate other layers return values based on contracts. 
 
 ## Final Product: [https://hhissa.github.io/CHECK_YOUR_FORESTS](https://hhissa.github.io/CHECL_YOUR_FORESTS/)
+
