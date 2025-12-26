@@ -34,7 +34,11 @@ src
     ├── splash_screen.html    
     └── splash_screen.ts    
 
+
+
 Their relationships can be defined like so:
+
+
 <img width="1938" height="1246" alt="image" src="https://github.com/user-attachments/assets/9baad387-df65-4a37-8d8e-71a1397d0485" />
 
 
@@ -66,6 +70,8 @@ Adhering to a rigid code structure allowed me to work methodically - filling in 
 
 ## Final Product: [https://hhissa.github.io/CHECK_YOUR_FORESTS](https://hhissa.github.io/CHECL_YOUR_FORESTS/)
 
+
+<img width="1207" height="678" alt="image" src="https://github.com/user-attachments/assets/57d9ff3b-8c77-41ce-9cb9-54dcfa932b56" />
 
 
 
