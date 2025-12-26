@@ -8,31 +8,31 @@ An NDVI site capable of client-side computing of NDVI's from TIFF's using WEBGL,
 
 The source code, following clean architecure principles, is structured as so 
 src
-├── core <-- General base classes and scripts present across multiple features
-│   ├── network_test.ts 
-│   └── widgets 
-│       └── widget.ts 
-├── features
-│   └── imagery <-- main imagery feature
-│       ├── data
-│       │   ├── datasources <-- Lowest Layer - API calls 
-│       │   ├── models
-│       │   └── repositories <-- Repository contract implementation
-│       ├── domain
-│       │   ├── entities <-- domain specific data structures
-│       │   ├── repositories <-- respository contract for layer indepenance
-│       │   └── usecases <-- Imagery Use cases
-│       └── presentation
-│           ├── pages
-│           ├── state <-- State management with custom bloc implementation 
-│           └── widgets
-├── package.json
-├── package-lock.json
-└── pages <--feature independant UI
-    ├── selection_page.html
-    ├── splash_screen.css
-    ├── splash_screen.html
-    └── splash_screen.ts
+├── core <-- General base classes and scripts present across multiple features  
+│   ├── network_test.ts  
+│   └── widgets  
+│       └── widget.ts  
+├── features  
+│   └── imagery <-- main imagery feature  
+│       ├── data  
+│       │   ├── datasources <-- Lowest Layer - API calls   
+│       │   ├── models   
+│       │   └── repositories <-- Repository contract implementation   
+│       ├── domain   
+│       │   ├── entities <-- domain specific data structures   
+│       │   ├── repositories <-- respository contract for layer indepenance   
+│       │   └── usecases <-- Imagery Use cases    
+│       └── presentation   
+│           ├── pages   
+│           ├── state <-- State management with custom bloc implementation    
+│           └── widgets   
+├── package.json   
+├── package-lock.json    
+└── pages <--feature independant UI   
+    ├── selection_page.html   
+    ├── splash_screen.css    
+    ├── splash_screen.html    
+    └── splash_screen.ts    
 
 Their relationships can be defined like so:
 <img width="1938" height="1246" alt="image" src="https://github.com/user-attachments/assets/9baad387-df65-4a37-8d8e-71a1397d0485" />
@@ -65,4 +65,5 @@ Adhering to a rigid code structure allowed me to work methodically - filling in 
 - layered structure allows for testing in isolation using mock testing to simulate other layers return values based on contracts. 
 
 ## Final Product: [https://hhissa.github.io/CHECK_YOUR_FORESTS](https://hhissa.github.io/CHECL_YOUR_FORESTS/)
+
 
