@@ -70,7 +70,7 @@ export class ImageryRemoteDataSourceWMS implements ImageryRemoteDataSource {
       // Fetch Red and NIR bands
       const NDVILayer = "MODIS_Terra_L3_NDVI_16Day";
 
-      const NDVIUrl = `${wmsBase}?SERVICE=WMS&REQUEST=GetMap&VERSION=1.3.0&LAYERS=${NDVILayer}&TIME=${time}&BBOX=${bbox}&CRS=EPSG:4326&WIDTH=${width}&HEIGHT=${height}&FORMAT=image/png`;
+      const NDVIUrl = `${wmsBase}?SERVICE=WMS&REQUEST=GetMap&VERSION=1.3.0&LAYERS=${NDVILayer}&TIME=${time}&BBOX=${bbox}&CRS=EPSG:4326&WIDTH=${width}&HEIGHT=${height}&STYLES=&TRANSPARENT=FALSE&FORMAT=image/png`;
       console.log(NDVIUrl)
       const ndviResp = await fetch(NDVIUrl);
 
@@ -85,7 +85,7 @@ export class ImageryRemoteDataSourceWMS implements ImageryRemoteDataSource {
       return ImageryModel.fromJson({
         id: crypto.randomUUID(),
         images: {
-          ndvi: { data: ndviData, mimeType: "image/jpg" },
+          ndvi: { data: ndviData, mimeType: "image/png" },
         },
         bbox: params.bbox,
         date: time,

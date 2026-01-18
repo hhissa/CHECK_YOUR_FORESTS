@@ -12,6 +12,19 @@ export class SideBar extends Widget {
     this.map = map;
   }
 
+  private snapToMODIS16Day(date: Date): Date {
+    const epoch = new Date(Date.UTC(2000, 0, 1)); // MODIS reference
+    const msPerDay = 24 * 60 * 60 * 1000;
+
+    const daysSinceEpoch =
+      Math.floor((date.getTime() - epoch.getTime()) / msPerDay);
+
+    const compositeIndex = Math.floor(daysSinceEpoch / 16);
+    const snappedDays = compositeIndex * 16;
+
+    return new Date(epoch.getTime() + snappedDays * msPerDay);
+  }
+
 
   private bindFetchButton() {
     const btn = this.root.querySelector<HTMLButtonElement>("#fetch-imagery");
@@ -37,11 +50,17 @@ export class SideBar extends Widget {
       console.log("Computed bbox:", bbox);
 
 
-      const today = new Date();
 
-      // Subtract 7 days (7 * 24 * 60 * 60 * 1000 milliseconds)
-      const weekAgo = new Date(today.getTime() - 7 * 24 * 60 * 60 * 1000);
-      bloc.dispatch(new getNDVIImagery(bbox, weekAgo));
+      const SAFE_DAYS_BACK = 45;
+
+      const safeDate = new Date(
+        Date.now() - SAFE_DAYS_BACK * 24 * 60 * 60 * 1000
+      );
+
+      const date = this.snapToMODIS16Day(safeDate);
+
+      bloc.dispatch(new getNDVIImagery(bbox, date));
+
 
     });
   }
